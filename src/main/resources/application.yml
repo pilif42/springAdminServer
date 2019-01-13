@@ -1,0 +1,19 @@
+# Config below to be used only if clients can't register themselves with the Admin server
+#spring:
+#  cloud:
+#    discovery:
+#      client:
+#        simple:
+#          instances:
+#            eurekaDiscoveryClient81:
+#            - uri: http://localhost:8081
+#              metadata:
+#                management.context-path: /actuator
+#            eurekaDiscoveryClient82:
+#            - uri: http://localhost:8082
+#              metadata:
+#                management.context-path: /actuator
+
+
+server:
+  port: 8085
