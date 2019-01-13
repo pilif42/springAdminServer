@@ -33,8 +33,15 @@ dependencyManagement {
 }
 
 dependencies {
+	// next line to get the Spring Admin Server. It runs on Netty by default.
 	implementation 'de.codecentric:spring-boot-admin-starter-server'
+
+	// next line to run the Spring Admin Server on Tomcat.
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+
+	// next line to be able to add Basic Authentication
 	implementation 'org.springframework.boot:spring-boot-starter-security'
+
 
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }

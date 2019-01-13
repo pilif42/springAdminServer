@@ -19,40 +19,11 @@ http://localhost:8085
 
 
     - customized security:
-            - as we use the Netty server (ie Spring WebFlux), TODO
-                    - https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#boot-features-security-webflux
-                    public SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http) ....
-            - see notes below when using Spring MVC
+            - using Tomcat:
+                    TODO Now that I have added WebSecurityConfig
+                    TODO DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' not supported]
+            - using Netty:
+                    TODO See docs for Spring WebFlux)
+                    TODO https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#boot-features-security-webflux
+                    TODO public SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http) ....
 
-
-# Achieve customized security when using Spring MVC
-@Configuration
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http.formLogin()
-                .loginPage("/login.html")
-                .loginProcessingUrl("/login")
-                .permitAll();
-
-        http.logout().logoutUrl("/logout");
-
-        http.csrf().disable();
-
-        http.authorizeRequests()
-                .antMatchers("/login.html", "/**/*.css", "/img/**", "/third-party/**")
-                .permitAll();
-
-        http.authorizeRequests()
-                .antMatchers("/**")
-                .hasRole("USER");
-        http.httpBasic();
-    }
-
-    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        // TODO Have these credentials in a props file
-        auth.inMemoryAuthentication().withUser("user").password("pass").roles("USER");
-    }
-}
